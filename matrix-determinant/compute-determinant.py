@@ -5,6 +5,7 @@ def determine(matrix, size):
     if size == 1:
         newDet = matrix[0]
         return newDet
+    #del this is not needed any longer
     # elif size == 2:
     #     newDet = matrix[0] * matrix[3] - matrix[1] * matrix[2]
     #     return newDet
@@ -35,7 +36,7 @@ def determine(matrix, size):
         return newDet
 
 
-print("\n\t\t\tHello, welcome to determinant 2016. v.d4", ("\n\t\t"+"-"*50)*2)
+print("\n\t\t\tHello, welcome to determinanator 2016. v.d4", ("\n\t\t"+"-"*50)*2)
 raws = int(input("\nmatrix A, n*n, n = "))
 
 print("Be ready to insert all the elements of your matrix below.\n")
