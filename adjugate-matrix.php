@@ -1,3 +1,4 @@
+<?php
 // this pogramme computes an adjugate matrix for any matrix given
 // matrices are taken from the code itself
 
