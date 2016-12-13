@@ -1,2 +1,2 @@
 # LinearAlgebra
-small python math-related functions grouped together 
+small php/python math-related functions grouped together 
