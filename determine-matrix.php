@@ -13,7 +13,7 @@ function determine($matrix){
         $determinant = 0;
         foreach ($matrix[0] as $position => $element){
             $minorMatrix = [];
-            $multiplier = ($position & 1) ? 1 : -1;
+            $multiplier = ($position & 1) ? -1 : +1;
             for ($row = 1; $row < $size; $row++){
                 $slicedRow = $matrix[$row];
                 array_splice($slicedRow, $position, 1);
