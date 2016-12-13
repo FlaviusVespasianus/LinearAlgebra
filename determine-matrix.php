@@ -1,6 +1,6 @@
 <?php
-//takes any matrix in a format: [ [0] ] 
-//and returns its determinant (a number)
+//takes: any matrix of [ [0] ] format  --array
+//returns: its determinant  --integer
 
 function determine($matrix){
     $size = count($matrix);
@@ -13,10 +13,7 @@ function determine($matrix){
         $determinant = 0;
         foreach ($matrix[0] as $position => $element){
             $minorMatrix = [];
-            $multiplier = 1;
-            if ($position & 1){
-                $multiplier *= -1;
-            }
+            $multiplier = ($position & 1) ? 1 : -1;
             for ($row = 1; $row < $size; $row++){
                 $slicedRow = $matrix[$row];
                 array_splice($slicedRow, $position, 1);
