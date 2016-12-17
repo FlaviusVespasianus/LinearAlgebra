@@ -9,7 +9,7 @@
 namespace LinearAlgebra;
 
 //Matrix Operations class
-class MXO
+class MatrixOperations
 {
 
 }
