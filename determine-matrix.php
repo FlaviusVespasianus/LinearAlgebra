@@ -2,7 +2,8 @@
 //takes: any matrix of [ [0] ] format  --array
 //returns: its determinant  --integer
 
-function determine($matrix){
+function determine($matrix)
+{
     $size = count($matrix);
     if ($size != count($matrix[0])) {
         return null;

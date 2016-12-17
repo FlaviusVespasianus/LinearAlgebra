@@ -1,8 +1,8 @@
 <?php
-
 //prints matrix on the screen
 
-function showMatrix($matrix){
+function showMatrix($matrix)
+{
     $max = 0;
     foreach ($matrix as $row){
         foreach ($row as $element){
