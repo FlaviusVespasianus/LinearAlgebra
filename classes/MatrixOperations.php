@@ -53,27 +53,45 @@ class MatrixOperations
         return $transposedMatrix;
     }
     
-    public static function cofactor(Matrix $matrix): ?Matrix
-    {
-        if ($matrix->getSquare()) {
-            $coMatrixBody = [];
-            foreach ($matrix->getBody() as $rowPosition => $row) {
-                foreach ($row as $position => $element) {
-                    $multiplier = ($position & 1) ? -1 : +1;
-                    $mPart = $matrix->getBody();
-                    array_splice($mPart, $rowPosition, 1);
-                    foreach ($mPart as & $slicedRow) {
-                        array_splice($slicedRow, $position, 1);
-                    }
-                    $minorMatrix = new Matrix($mPart);
-                    $coMatrixBody[$rowPosition][$position] = $multiplier * $minorMatrix->getDeterminant();
+    public static function cofactor(Matrix $matrix): Matrix
+    {      
+        $coMatrixBody = [];
+        foreach ($matrix->getBody() as $rowPosition => $row) {
+            foreach ($row as $position => $element) {
+                $multiplier = ($position & 1) ? -1 : +1;
+                $mPart = $matrix->getBody();
+                array_splice($mPart, $rowPosition, 1);
+                foreach ($mPart as & $slicedRow) {
+                    array_splice($slicedRow, $position, 1);
                 }
+                $minorMatrix = new Matrix($mPart);
+                $coMatrixBody[$rowPosition][$position] = $multiplier * $minorMatrix->getDeterminant();
             }
-            $coMatrixBody = new Matrix($coMatrixBody);
-            return $coMatrixBody;
+        }
+        $coMatrixBody = new Matrix($coMatrixBody);
+        return $coMatrixBody;
+    }
+    
+    public static function adjugate(Matrix $matrix): ?Matrix
+    {
+        if ($matrix->getSquare()) {          
+            $adjointMatrix = self::transpose(self::cofactor($matrix));
+            return $adjointMatrix;
         } else {
             return null;
+        }                       
+    }
+    
+    //makes a new matrix, need to fix to fixing the old one FLOAT??
+    public static function multiplyByBumber(Matrix $matrix, float $number): Matrix
+    {
+        $body = $matrix->getBody();
+        foreach ($body as & $row) {
+            foreach ($row as & $element) {
+                $element *= $number;
+            }
         }
+        return new Matrix($body);
     }
     
     
