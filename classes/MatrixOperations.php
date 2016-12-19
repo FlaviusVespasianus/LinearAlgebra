@@ -83,7 +83,7 @@ class MatrixOperations
     }
     
     //makes a new matrix, need to fix to fixing the old one FLOAT??
-    public static function multiplyByBumber(Matrix $matrix, float $number): Matrix
+    public static function multiplyByNumber(Matrix $matrix, float $number): Matrix
     {
         $body = $matrix->getBody();
         foreach ($body as & $row) {
@@ -97,7 +97,7 @@ class MatrixOperations
     public static function invert(Matrix $matrix): ?Matrix
     {
         if ($matrix->getSquare()) {
-            $inverseMatrix = self::multiplyByNumber(adjugate($matrix), 1/($matrix->getDeterminant));
+            $inverseMatrix = self::multiplyByNumber(self::adjugate($matrix), 1/($matrix->getDeterminant()));
             return $inverseMatrix;
         } else {
             return null;
