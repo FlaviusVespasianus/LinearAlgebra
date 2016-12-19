@@ -94,5 +94,14 @@ class MatrixOperations
         return new Matrix($body);
     }
     
-    
+    public static function invert(Matrix $matrix): ?Matrix
+    {
+        if ($matrix->getSquare()) {
+            $inverseMatrix = self::multiplyByNumber(adjugate($matrix), 1/($matrix->getDeterminant));
+            return $inverseMatrix;
+        } else {
+            return null;
+        } 
+    }
+   
 }
