@@ -50,8 +50,31 @@ class MatrixOperations
             }
             $transposedMatrix = new Matrix($transposedMatrix->body);
         }
-
         return $transposedMatrix;
-
     }
+    
+    public static function cofactor(Matrix $matrix): ?Matrix
+    {
+        if ($matrix->getSquare()) {
+            $coMatrixBody = [];
+            foreach ($matrix->getBody() as $rowPosition => $row) {
+                foreach ($row as $position => $element) {
+                    $multiplier = ($position & 1) ? -1 : +1;
+                    $mPart = $matrix->getBody();
+                    array_splice($mPart, $rowPosition, 1);
+                    foreach ($mPart as & $slicedRow) {
+                        array_splice($slicedRow, $position, 1);
+                    }
+                    $minorMatrix = new Matrix($mPart);
+                    $coMatrixBody[$rowPosition][$position] = $multiplier * $minorMatrix->getDeterminant();
+                }
+            }
+            $coMatrixBody = new Matrix($coMatrixBody);
+            return $coMatrixBody;
+        } else {
+            return null;
+        }
+    }
+    
+    
 }
