@@ -48,6 +48,7 @@ class MatrixOperations
                     $transposedMatrix->body[$position][] = $element;
                 }
             }
+            $transposedMatrix = new Matrix($transposedMatrix->body);
         }
 
         return $transposedMatrix;
