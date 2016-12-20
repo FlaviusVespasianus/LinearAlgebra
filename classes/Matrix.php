@@ -8,6 +8,11 @@ class Matrix
     protected $columns;
     protected $determinant; //int
     protected $square; //bool
+    
+    protected $trace;
+    protected $kernel;
+    protected $scalar;
+    //диагональ, единичная, жордано, и тп.
 
     public $body;
 
