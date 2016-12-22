@@ -9,7 +9,48 @@
 //Matrix Operations class
 class MatrixOperations
 {
-    public static function determine(Matrix $matrix): ?int
+    //all matrix operations
+    //-----------------------------------------------------
+
+    //транспонирование
+    public static function transpose(Matrix $matrix): Matrix
+    {
+        if ($matrix->getRows() == 1){
+            for ($i = 0; $i < count($matrix->getBody()[0]); $i++){
+                $transposedBody[$i][] = $matrix->getBody()[0][$i];
+            }
+            $transposedMatrix = new Matrix($transposedBody);
+        } else {
+            $transposedMatrix = self::transpose(new Matrix([$matrix->getBody()[0]]));
+            for ($m = 1; $m < $matrix->getRows(); $m++){
+                foreach ($matrix->getBody()[$m] as $position => $element) {
+                    $transposedMatrix->getBody()[$position][] = $element;
+                }
+            }
+            $transposedMatrix = new Matrix($transposedMatrix->getBody());
+        }
+        return $transposedMatrix;
+    }
+
+    //makes a new matrix, need to fix to fixing the old one FLOAT??
+    //умножение матрицы на число
+    public static function multiplyByNumber(Matrix $matrix, float $number): Matrix
+    {
+        $body = $matrix->getBody();
+        foreach ($body as & $row) {
+            foreach ($row as & $element) {
+                $element *= $number;
+            }
+        }
+        return new Matrix($body);
+    }
+
+
+    //sqare matrix operations
+    //---------------------------------------------------------------------------------
+
+    //определитель матрицы
+    public static function determine(SquareMatrix $matrix): ?float
     {
         $rows = $matrix->getRows();
         $determinant = null;
@@ -26,7 +67,7 @@ class MatrixOperations
                     array_splice($slicedRow, $position, 1);
                     $minorBody[] = $slicedRow;
                 }
-                $minorMatrix = new Matrix($minorBody);
+                $minorMatrix = new SquareMatrix($minorBody);
                 $summand = $multiplier * $element * MatrixOperations::determine($minorMatrix);
                 $determinant += $summand;
             }
@@ -34,25 +75,8 @@ class MatrixOperations
         return $determinant;
     }
 
-    public static function transpose(Matrix $matrix): Matrix
-    {
-        if ($matrix->getRows() == 1){
-            for ($i = 0; $i < count($matrix->getBody()[0]); $i++){
-                $transposedBody[$i][] = $matrix->getBody()[0][$i];
-            }
-            $transposedMatrix = new Matrix($transposedBody);
-        } else {
-            $transposedMatrix = self::transpose(new Matrix([$matrix->getBody()[0]]));
-            for ($m = 1; $m < $matrix->getRows(); $m++){
-                foreach ($matrix->getBody()[$m] as $position => $element) {
-                    $transposedMatrix->body[$position][] = $element;
-                }
-            }
-            $transposedMatrix = new Matrix($transposedMatrix->body);
-        }
-        return $transposedMatrix;
-    }
-    
+
+    //нахождение
     public static function cofactor(Matrix $matrix): Matrix
     {      
         $coMatrixBody = [];
@@ -82,17 +106,7 @@ class MatrixOperations
         }                       
     }
     
-    //makes a new matrix, need to fix to fixing the old one FLOAT??
-    public static function multiplyByNumber(Matrix $matrix, float $number): Matrix
-    {
-        $body = $matrix->getBody();
-        foreach ($body as & $row) {
-            foreach ($row as & $element) {
-                $element *= $number;
-            }
-        }
-        return new Matrix($body);
-    }
+
     
     public static function invert(Matrix $matrix): ?Matrix
     {
@@ -103,5 +117,11 @@ class MatrixOperations
             return null;
         } 
     }
+
+//    public static function calculateTrace(SquareMatrix $matrix): float
+//    {
+//        foreach ($matrix->getBody() as $row)
+//        $trace =
+//    }
    
 }
