@@ -118,10 +118,25 @@ class MatrixOperations
         } 
     }
 
-//    public static function calculateTrace(SquareMatrix $matrix): float
-//    {
-//        foreach ($matrix->getBody() as $row)
-//        $trace =
-//    }
+   public static function calculateTrace(SquareMatrix $matrix): float
+   {
+       $trace = 0;
+       while ($i < $matrix->getColumns()) {
+           foreach ($matrix->getBody() as $row) {        
+                    $trace += $row[$i];
+                    $i++;
+           }
+       }
+       return $trace;    
+       
+        
+   }
+   
+    //проверить подобие двух матриц
+//     public function 
+    
+    //умножение двух матриц
+    
+    
    
 }
