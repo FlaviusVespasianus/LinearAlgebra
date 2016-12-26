@@ -10,11 +10,11 @@ class SquareMatrix extends Matrix
 {
 
     protected $determinant; //int
-    protected $square; //bool
+    protected $type = ['diagonal' => 0, 'scalar' => 0, 'ed' => 0]; //bool
 
     protected $trace;
     protected $kernel;
-    protected $scalar;
+    
     //диагональ, единичная, жордано, и тп.
 
 
@@ -26,8 +26,35 @@ class SquareMatrix extends Matrix
         $this->trace = MatrixOperations::calculateTrace($this);
     }
 
-    public function showMatrix(string $output = 'console') {
-
+    public function showMatrix(string $output = 'console', string $settings = 'all') {
+        $print = '';
+        switch ($output){
+            case('console'):
+                $print = "\n";
+                break;
+            case('browser'):
+                $print = "<pre>";
+                break;
+        }
+        $max = 0;
+        foreach ($this->body as $row){
+            foreach ($row as $element){
+                if (strlen($element) > $max){
+                    $max = strlen($element);
+                }
+            }
+        }
+        foreach ($this->body as $row){
+            print $print;
+            foreach ($row as $element){
+                $string = str_pad($element, $max + 1, ' ', STR_PAD_BOTH);
+                print "$string";
+            }
+            print $print;
+        }
+    }
+    
+        
     }
 
 }
