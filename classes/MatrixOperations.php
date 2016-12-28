@@ -136,6 +136,15 @@ class MatrixOperations
 //     public function 
     
     //умножение двух матриц
+    public static function multMbyM(Matrix $matrix1, Matrix $matrix2): ?Matrix
+    {
+        if ($matrix1->getColumns != $matrix2->getRows) {
+            return null;
+        } else {
+            foreach($matrix1->getBody() as $row) {
+                for ($column = 0; $column < $matrix2->getColumns(); $column++) {
+                    
+                $matrix->getBody()
     
     
    
