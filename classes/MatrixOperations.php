@@ -135,17 +135,27 @@ class MatrixOperations
     //проверить подобие двух матриц
 //     public function 
     
-    //умножение двух матриц
+    //умножение двух матриц MxK *  KxN = MxN
     public static function multMbyM(Matrix $matrix1, Matrix $matrix2): ?Matrix
     {
         if ($matrix1->getColumns != $matrix2->getRows) {
             return null;
         } else {
-            foreach($matrix1->getBody() as $row) {
-                for ($column = 0; $column < $matrix2->getColumns(); $column++) {
-                    
-                $matrix->getBody()
-    
-    
-   
+            $mk = $matrix1->getBody();
+            $kn = $matrix2->getBody();
+            $mn = [];
+            sum = 0;
+            for ($i = 0; $i < $matrix1->getRows(); $i++) {
+                for ($j = 0; $j < $matrix2->getColumns(); $j++) {
+                    for ($k = 0; $k < $matrix1->getColumns(); $k++) {
+                        sum += $mk[i][k] * $kn[k][j];
+                    }
+                    $mn[i][j] = sum;
+                    sum = 0;
+                }
+            }
+            return Matrix /// тут новую матрицу собрать надо из тела
+        }
+            
+            
 }
