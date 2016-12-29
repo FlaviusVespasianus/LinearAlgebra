@@ -154,8 +154,11 @@ class MatrixOperations
                     sum = 0;
                 }
             }
-            return Matrix /// тут новую матрицу собрать надо из тела
+            return Matrix::create($mn);
         }
+    }
+    
+    
             
             
 }
