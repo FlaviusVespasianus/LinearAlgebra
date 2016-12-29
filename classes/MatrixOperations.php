@@ -50,7 +50,7 @@ class MatrixOperations
     //---------------------------------------------------------------------------------
 
     //определитель матрицы
-    public static function determine(SquareMatrix $matrix): ?float
+    public static function determine(SquareMatrix $matrix)
     {
         $rows = $matrix->getRows();
         $determinant = null;

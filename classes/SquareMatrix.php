@@ -9,7 +9,7 @@
 class SquareMatrix extends Matrix
 {
 
-    protected $determinant; //int
+    public $determinant; //int
     protected $square; //bool
 
     protected $trace;
@@ -23,11 +23,11 @@ class SquareMatrix extends Matrix
     {
         parent::__construct($body);
         $this->determinant = MatrixOperations::determine($this);
-        $this->trace = MatrixOperations::calculateTrace($this);
+//        $this->trace = MatrixOperations::calculateTrace($this);
     }
 
-    public function showMatrix(string $output = 'console') {
-
-    }
+//    public function showMatrix(string $output = 'console') {
+//
+//    }
 
 }

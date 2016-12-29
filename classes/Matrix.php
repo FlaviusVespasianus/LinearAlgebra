@@ -28,7 +28,7 @@ class Matrix
 
         if ($isMatrix) {
 
-            if (count($body) == count($body)[0]) {
+            if (count($body) == count($body[0])) {
 
                 return new SquareMatrix($body);
 
