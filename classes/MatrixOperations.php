@@ -158,7 +158,28 @@ class MatrixOperations
         }
     }
     
+    //check if any amount of vectors form a basis in their dimention
+    //takes any number of vectors
+    //returns bool
+    //-----------------------------------------------------------------needs hevy testing
+    public static function areBasis(...$vectors): boolean
+    {
+        if ((count($vectors) != count($vector[0]) or (empty($vector[0]) {
+            return false;
+        }
+        
+        $m = [];
+        
+        foreach ($vectors as $vector) {
+            if (!(($vector instanceof Vector) and (count($vector) == count($vectors[0])))) {
+                return false;
+            }
+            $m[] = $vector->getBody();
+        }
+        $matrix = Matrix::create($m);
+        return ($matrix->getDeterminant() != 0) true : false;
+                
+    }
     
-            
             
 }
