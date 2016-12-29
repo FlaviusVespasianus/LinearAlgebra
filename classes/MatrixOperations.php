@@ -118,10 +118,68 @@ class MatrixOperations
         } 
     }
 
-//    public static function calculateTrace(SquareMatrix $matrix): float
-//    {
-//        foreach ($matrix->getBody() as $row)
-//        $trace =
-//    }
+   public static function calculateTrace(SquareMatrix $matrix): float
+   {
+       $trace = 0;
+       while ($i < $matrix->getColumns()) {
+           foreach ($matrix->getBody() as $row) {        
+                    $trace += $row[$i];
+                    $i++;
+           }
+       }
+       return $trace;    
+       
+        
+   }
    
+    //проверить подобие двух матриц
+//     public function 
+    
+    //умножение двух матриц MxK *  KxN = MxN
+    public static function multMbyM(Matrix $matrix1, Matrix $matrix2): ?Matrix
+    {
+        if ($matrix1->getColumns != $matrix2->getRows) {
+            return null;
+        } else {
+            $mk = $matrix1->getBody();
+            $kn = $matrix2->getBody();
+            $mn = [];
+            sum = 0;
+            for ($i = 0; $i < $matrix1->getRows(); $i++) {
+                for ($j = 0; $j < $matrix2->getColumns(); $j++) {
+                    for ($k = 0; $k < $matrix1->getColumns(); $k++) {
+                        sum += $mk[i][k] * $kn[k][j];
+                    }
+                    $mn[i][j] = sum;
+                    sum = 0;
+                }
+            }
+            return Matrix::create($mn);
+        }
+    }
+    
+    //check if any amount of vectors form a basis in their dimention
+    //takes any number of vectors
+    //returns bool
+    //-----------------------------------------------------------------needs hevy testing
+    public static function areBasis(...$vectors): boolean
+    {
+        if ((count($vectors) != count($vector[0]) or (empty($vector[0]) {
+            return false;
+        }
+        
+        $m = [];
+        
+        foreach ($vectors as $vector) {
+            if (!(($vector instanceof Vector) and (count($vector) == count($vectors[0])))) {
+                return false;
+            }
+            $m[] = $vector->getBody();
+        }
+        $matrix = Matrix::create($m);
+        return ($matrix->getDeterminant() != 0) true : false;
+                
+    }
+    
+            
 }
