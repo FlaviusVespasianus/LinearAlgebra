@@ -19,15 +19,16 @@ class MatrixOperations
             for ($i = 0; $i < count($matrix->getBody()[0]); $i++){
                 $transposedBody[$i][] = $matrix->getBody()[0][$i];
             }
-            $transposedMatrix = new Matrix($transposedBody);
+            $transposedMatrix = Matrix::create($transposedBody);
         } else {
-            $transposedMatrix = self::transpose(new Matrix([$matrix->getBody()[0]]));
+            $transposedMatrix = self::transpose(Matrix::create([$matrix->getBody()[0]]));
             for ($m = 1; $m < $matrix->getRows(); $m++){
                 foreach ($matrix->getBody()[$m] as $position => $element) {
                     $transposedMatrix->getBody()[$position][] = $element;
                 }
             }
-            $transposedMatrix = new Matrix($transposedMatrix->getBody());
+//             $transposedMatrix = new Matrix($transposedMatrix->getBody());
+            $transposedMatrix = Matrix::create($transposedMatrix->getBody());
         }
         return $transposedMatrix;
     }
@@ -43,6 +44,29 @@ class MatrixOperations
             }
         }
         return new Matrix($body);
+    }
+    
+    //умножение двух матриц MxK *  KxN = MxN
+    public static function multMbyM(Matrix $matrix1, Matrix $matrix2): ?Matrix
+    {
+        if ($matrix1->getColumns() != $matrix2->getRows()) {
+            return null;
+        } else {
+            $mk = $matrix1->getBody();
+            $kn = $matrix2->getBody();
+            $mn = [];
+            sum = 0;
+            for ($i = 0; $i < $matrix1->getRows(); $i++) {
+                for ($j = 0; $j < $matrix2->getColumns(); $j++) {
+                    for ($k = 0; $k < $matrix1->getColumns(); $k++) {
+                        sum += $mk[i][k] * $kn[k][j];
+                    }
+                    $mn[i][j] = sum;
+                    sum = 0;
+                }
+            }
+            return Matrix::create($mn);
+        }
     }
 
 
@@ -135,28 +159,7 @@ class MatrixOperations
     //проверить подобие двух матриц
 //     public function 
     
-    //умножение двух матриц MxK *  KxN = MxN
-    public static function multMbyM(Matrix $matrix1, Matrix $matrix2): ?Matrix
-    {
-        if ($matrix1->getColumns != $matrix2->getRows) {
-            return null;
-        } else {
-            $mk = $matrix1->getBody();
-            $kn = $matrix2->getBody();
-            $mn = [];
-            sum = 0;
-            for ($i = 0; $i < $matrix1->getRows(); $i++) {
-                for ($j = 0; $j < $matrix2->getColumns(); $j++) {
-                    for ($k = 0; $k < $matrix1->getColumns(); $k++) {
-                        sum += $mk[i][k] * $kn[k][j];
-                    }
-                    $mn[i][j] = sum;
-                    sum = 0;
-                }
-            }
-            return Matrix::create($mn);
-        }
-    }
+    
     
     //check if any amount of vectors form a basis in their dimention
     //takes any number of vectors
