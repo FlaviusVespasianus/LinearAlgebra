@@ -7,10 +7,11 @@ class Matrix
     protected $rows;
     protected $columns;
     protected $body;
+    protected $name;
 
 
 
-    public static function create(array $body)
+    public static function create(array $body): Matrix
     {
         $isMatrix = true; //could be better
         foreach ($body as $row) {
@@ -82,6 +83,11 @@ class Matrix
     {
         return $this->body;
     }
+    
+    public function getName()
+    {
+        return $this->name;
+    }
 
 
     public function __construct(array $body)
@@ -89,38 +95,62 @@ class Matrix
         $this->rows = count($body);
         $this->columns = count($body[0]);
         $this->body = $body;
-
+        $this->name = chr(rand(65,90));
     }
 
 
 
-    public function showMatrix(string $output = 'console')
+    public function showMatrix(string $output = 'c', string $desc = 'a'): void
     {
-        $print = '';
-        switch ($output){
-            case('console'):
-                $print = "\n";
+        $nLine = '';
+        switch ($output) {
+            case 'c':      //console
+                $nLine = "\n";
                 break;
-            case('browser'):
-                $print = "<pre>";
+            case 'b':      //browser
+                $nLine = "<pre>";
                 break;
         }
+        ////////////////////////////////////////////
+        $type = 'matrix';
+        $types = ['SquareMatrix', 'Vector'];
+        foreach ($types as $t) {
+            if (is_a($this, $t) {
+                $type = $t;
+            }
+        }
+        ////////////////////////////
+        
+        
         $max = 0;
-        foreach ($this->body as $row){
-            foreach ($row as $element){
-                if (strlen($element) > $max){
+        foreach ($this->getBody() as $row) {
+            foreach ($row as $element) {
+                if (strlen($element) > $max) {
                     $max = strlen($element);
                 }
             }
         }
-        foreach ($this->body as $row){
-            print $print;
-            foreach ($row as $element){
+        foreach ($this->getBody() as $row) {
+            print $nLine;
+            foreach ($row as $element) {
                 $string = str_pad($element, $max + 1, ' ', STR_PAD_BOTH);
                 print "$string";
             }
-            print $print;
+            print $nLine;
         }
+        switch ($desc) {
+            case 'n':
+                break;
+            case 's':
+                print $type . ' ' . $this->getName() . ' ' . $this-getRows() . 'x' . $this->getColumns() . $nLine;
+                break;
+            case 'a':
+                print $type . ' ' . $this->getName() . ' ' . $this-getRows() . 'x' . $this->getColumns() . $nLine;
+                if ($this instnceof SquareMatrix) {
+                    print "its determinant: " . $this->getDeterminant();
+                }
+        }
+        
     }
 
 }
