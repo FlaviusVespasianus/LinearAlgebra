@@ -1,11 +1,5 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: mauri
- * Date: 22/12/2016
- * Time: 21:33
- */
 class SquareMatrix extends Matrix
 {
 
@@ -16,17 +10,27 @@ class SquareMatrix extends Matrix
     protected $kernel;
     
     //диагональ, единичная, жордано, и тп.
+    public function getDeterminant()
+    {
+        return $this->determinant;
+    }
 
+    public function getType()
+    {
+        return $this->type;
+    }
 
 
     public function __construct(array $body)
     {
         parent::__construct($body);
         $this->determinant = MatrixOperations::determine($this);
-        $this->trace = MatrixOperations::calculateTrace($this);
+        //$this->trace = MatrixOperations::calculateTrace($this);
     }
 
-    public function showMatrix(string $output = 'console', string $settings = 'all') {
+    //just for the visual representation of the matrix
+    public function showMatrix(string $output = 'console', string $settings = 'all'): void
+    {
         $print = '';
         switch ($output){
             case('console'):
@@ -55,6 +59,6 @@ class SquareMatrix extends Matrix
     }
     
         
-    }
+
 
 }

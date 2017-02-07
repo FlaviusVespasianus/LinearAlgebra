@@ -17,4 +17,4 @@ spl_autoload_register(function ($class_name) {
 $new = Matrix::create([[4,-2,3], [1,-1,1], [4,1,5]]);
 $new->showMatrix();
 
-print $new->determinant;
+MatrixOperations::transpose($new)->showMatrix();

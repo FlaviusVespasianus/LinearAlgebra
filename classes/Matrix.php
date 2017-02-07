@@ -10,10 +10,13 @@ class Matrix
     protected $name;
 
 
-
+    /*
+     * this method creates a new instance of the Matrix class
+     * therefore the magic methods are not allowed
+     */
     public static function create(array $body): Matrix
     {
-        $isMatrix = true; //could be better
+        $isMatrix = true; //could be done better, but for now it's ok
         foreach ($body as $row) {
             if (is_array($row)) {
                 if (count($body[0]) != count($row)) {
@@ -22,15 +25,10 @@ class Matrix
             } else {
                 $isMatrix = false;
             }
-
-
-
         }
 
         if ($isMatrix) {
-
             if (count($body) == count($body[0])) {
-
                 return new SquareMatrix($body);
 
             } elseif (count($body) == 1) {
@@ -44,6 +42,9 @@ class Matrix
 
 
         } else {
+            //there has to be throwing an Exception here,
+            //
+            // has to be redone!
 
             return null;
 
@@ -67,16 +68,6 @@ class Matrix
     public function getColumns()
     {
         return $this->columns;
-    }
-
-    public function getDeterminant()
-    {
-        return $this->determinant;
-    }
-
-    public function getSquare()
-    {
-        return $this->square;
     }
 
     public function getBody()
@@ -112,10 +103,11 @@ class Matrix
                 break;
         }
         ////////////////////////////////////////////
+        //bad design here
         $type = 'matrix';
         $types = ['SquareMatrix', 'Vector'];
         foreach ($types as $t) {
-            if (is_a($this, $t) {
+            if (is_a($this, $t)) {
                 $type = $t;
             }
         }
@@ -146,7 +138,7 @@ class Matrix
                 break;
             case 'a':
                 print $type . ' ' . $this->getName() . ' ' . $this-getRows() . 'x' . $this->getColumns() . $nLine;
-                if ($this instnceof SquareMatrix) {
+                if ($this instanceof SquareMatrix) {
                     print "its determinant: " . $this->getDeterminant();
                 }
         }

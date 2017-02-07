@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mauri
- * Date: 17/12/2016
- * Time: 18:07
- */
+
 
 //Matrix Operations class
 class MatrixOperations
@@ -19,7 +14,7 @@ class MatrixOperations
             for ($i = 0; $i < count($matrix->getBody()[0]); $i++){
                 $transposedBody[$i][] = $matrix->getBody()[0][$i];
             }
-            $transposedMatrix = Matrix::create($transposedBody);
+            $transposedMatrix = Matrix::create($transposedBody); //ought to be
         } else {
             $transposedMatrix = self::transpose(Matrix::create([$matrix->getBody()[0]]));
             for ($m = 1; $m < $matrix->getRows(); $m++){
@@ -27,9 +22,10 @@ class MatrixOperations
                     $transposedMatrix->getBody()[$position][] = $element;
                 }
             }
-//             $transposedMatrix = new Matrix($transposedMatrix->getBody());
+
             $transposedMatrix = Matrix::create($transposedMatrix->getBody());
         }
+        var_dump($transposedMatrix);
         return $transposedMatrix;
     }
 
@@ -55,14 +51,14 @@ class MatrixOperations
             $mk = $matrix1->getBody();
             $kn = $matrix2->getBody();
             $mn = [];
-            sum = 0;
+            $sum = 0;
             for ($i = 0; $i < $matrix1->getRows(); $i++) {
                 for ($j = 0; $j < $matrix2->getColumns(); $j++) {
                     for ($k = 0; $k < $matrix1->getColumns(); $k++) {
-                        sum += $mk[i][k] * $kn[k][j];
+                        $sum += $mk[$i][$k] * $kn[$k][$j];
                     }
-                    $mn[i][j] = sum;
-                    sum = 0;
+                    $mn[$i][$j] = $sum;
+                    $sum = 0;
                 }
             }
             return Matrix::create($mn);
@@ -78,9 +74,7 @@ class MatrixOperations
     {
         $rows = $matrix->getRows();
         $determinant = null;
-        if (!$matrix->getSquare()) {
-            return $determinant;
-        } elseif ($rows == 1) {
+        if ($rows == 1) {
             $determinant = $matrix->getBody()[0][0];
         } elseif ($rows > 1) {
             foreach ($matrix->getBody()[0] as $position => $element){
@@ -142,6 +136,7 @@ class MatrixOperations
         } 
     }
 
+    /*
    public static function calculateTrace(SquareMatrix $matrix): float
    {
        $trace = 0;
@@ -155,6 +150,7 @@ class MatrixOperations
        
         
    }
+    */
    
     //проверить подобие двух матриц
 //     public function 
@@ -165,9 +161,10 @@ class MatrixOperations
     //takes any number of vectors
     //returns bool
     //-----------------------------------------------------------------needs hevy testing
+    /*
     public static function areBasis(...$vectors): boolean
     {
-        if ((count($vectors) != count($vector[0]) or (empty($vector[0]) {
+        if ((count($vectors) != count($vectors[0]) or (empty($vectors[0]) {
             return false;
         }
         
@@ -183,6 +180,7 @@ class MatrixOperations
         return ($matrix->getDeterminant() != 0) true : false;
                 
     }
+    */
     
             
 }
